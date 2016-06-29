@@ -42,15 +42,6 @@
         app:baseColor="@color/material_base_color"
         app:primaryColor="@color/material_primary_color"
         app:floatingLabel="highlight"/>
-    <com.rengwuxian.materialedittext.MaterialEditText
-        style="@style/one_line_material"
-        android:id="@+id/suoshujigou"
-        android:hint="@string/search_suoshujigou"
-        android:editable="false"
-        android:focusable="false"
-        app:baseColor="@color/material_base_color"
-        app:primaryColor="@color/material_primary_color"
-        app:floatingLabel="highlight"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

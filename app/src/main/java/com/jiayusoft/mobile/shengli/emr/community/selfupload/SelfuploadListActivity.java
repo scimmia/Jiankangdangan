@@ -110,7 +110,6 @@ public class SelfuploadListActivity extends BaseActivity {
 
     void loadMore() {
         String url = String.format(healthcheckLoadMoreUrl,
-                BaseApplication.getCurrentUser().getOrgCode(),
                 BaseApplication.getCurrentUser().getIdcard(),
                 mUploadType,mCardItems.size());
         new HttpTask(getBaseActivity(), "查询中...", httpGet, tagHealthcheckLoadMore, url, null)

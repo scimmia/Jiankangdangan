@@ -7,8 +7,6 @@ public class UserCommunity {
 
     String name;
     String idcard;
-    String orgCode;
-    String loginAccount;
     String password;
     private String logoName;
     private String logoColor;
@@ -27,22 +25,6 @@ public class UserCommunity {
 
     public void setIdcard(String idcard) {
         this.idcard = idcard;
-    }
-
-    public String getOrgCode() {
-        return orgCode;
-    }
-
-    public void setOrgCode(String orgCode) {
-        this.orgCode = orgCode;
-    }
-
-    public String getLoginAccount() {
-        return loginAccount;
-    }
-
-    public void setLoginAccount(String loginAccount) {
-        this.loginAccount = loginAccount;
     }
 
     public String getPassword() {

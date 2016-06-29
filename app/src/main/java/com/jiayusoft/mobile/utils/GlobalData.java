@@ -23,8 +23,6 @@ public interface GlobalData {
     public static final String LOGIN_PASSWORD = "LOGIN_PASSWORD";
     public static final String LOGIN_SAVE_PASSWORD = "LOGIN_SAVE_PASSWORD";
     public static final String loginAutoLogin = "loginAutoLogin";
-    public static final String loginSuoshuJigouName = "loginSuoshuJigouName";
-    public static final String loginSuoshuJigouID = "loginSuoshuJigouID";
 
 
     public static final String itemTitle = "itemTitle";
@@ -37,23 +35,19 @@ public interface GlobalData {
 
 
     public static final int tagLogin = 1;
-    String loginCommunity = "/user/login/community";
+    String loginCommunity = "/user/login/communitywithoutorg";
     public static final String loginUserID = "userid";
     public static final String loginPassword = "password";
-    public static final String loginOrgcode = "orgcode";
 
     public static final int tagCheckUpdate = 2;
     String checkUpdateUrl = "/user/checkUpdate";
     public static final int tagDownloadNewFile = 3;
 
-    public static final int tagGetOrgInfo = 4;
-    String getOrgInfoUrl = "/user/orginfo";
-
     String logoImgUrl = "Logo/%s";//fileName
 
 
     int tagcommunityBinganLoadMore = 11;
-    String communityBinganLoadMoreUrl = "/bingan/community/list";
+    String communityBinganLoadMoreUrl = "/bingan/community/listwithoutorg";
 
     int tagBinganDetail = 12;
     String binganDetailUrl = "/bingan/community/detail/%s/%s";
@@ -75,7 +69,7 @@ public interface GlobalData {
     String uploadSelfFileUrl = "/self/upload/file";
 
     int tagHealthcheckLoadMore = 21;
-    String healthcheckLoadMoreUrl = "/self/list/%s/%s/%d/%d";
+    String healthcheckLoadMoreUrl = "/self/list/%s/%d/%d";
     //{orgcode}/{idcard}/{uploadtype}/{startindex}
 
 

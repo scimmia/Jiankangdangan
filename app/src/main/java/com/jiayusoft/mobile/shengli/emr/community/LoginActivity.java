@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -19,16 +18,12 @@ import android.widget.LinearLayout;
 import butterknife.InjectView;
 import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
-import butterknife.OnFocusChange;
-import com.devspark.appmsg.AppMsg;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jiayusoft.mobile.shengli.emr.community.beans.UpdateInfo;
 import com.jiayusoft.mobile.shengli.emr.community.beans.UserCommunity;
 import com.jiayusoft.mobile.utils.DebugLog;
 import com.jiayusoft.mobile.utils.app.BaseActivity;
-import com.jiayusoft.mobile.utils.app.dialog.ChooseOrgDialogFragment;
-import com.jiayusoft.mobile.utils.app.dialog.ChooseOrgEvent;
 import com.jiayusoft.mobile.utils.app.listener.HideKeyboardListener;
 import com.jiayusoft.mobile.utils.http.BaseResponse;
 import com.jiayusoft.mobile.utils.http.HttpDownloadTask;
@@ -37,11 +32,9 @@ import com.jiayusoft.mobile.utils.http.HttpTask;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.squareup.otto.Subscribe;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.MutablePair;
 
 import java.io.File;
 import java.util.HashMap;
-import java.util.List;
 
 
 public class LoginActivity extends BaseActivity {
@@ -63,8 +56,6 @@ public class LoginActivity extends BaseActivity {
     CheckBox mLoginCbSavePassword;
     @InjectView(R.id.login_cb_auto_login)
     CheckBox mLoginCbAutoLogin;
-    @InjectView(R.id.suoshujigou)
-    MaterialEditText mSuoshujigou;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,8 +67,6 @@ public class LoginActivity extends BaseActivity {
         mLoginEtPassword.setText(sharedPreferences.getString(LOGIN_PASSWORD, null));
         mLoginCbSavePassword.setChecked(sharedPreferences.getBoolean(LOGIN_SAVE_PASSWORD, false));
         mLoginCbAutoLogin.setChecked(sharedPreferences.getBoolean(loginAutoLogin, false));
-        mSuoshujigou.setText(sharedPreferences.getString(loginSuoshuJigouName, null));
-        mSuoshujigou.setTag(sharedPreferences.getString(loginSuoshuJigouID, null));
 
         if (sharedPreferences.getString(serverUrl,null)==null){
             SharedPreferences.Editor spEd = sharedPreferences.edit();
@@ -89,43 +78,12 @@ public class LoginActivity extends BaseActivity {
         }
     }
 
-    List<MutablePair<String, String>> orgInfos;
-    @OnFocusChange(R.id.suoshujigou)
-    void onsuoshujigouFocus(boolean focused) {
-        if (focused) {
-            onsuoshujigou();
-        }
-    }
-
-    @OnClick(R.id.suoshujigou)
-    void onsuoshujigou() {
-        DebugLog.e("onsuoshujigou");
-        if (orgInfos!=null && orgInfos.size()>0){
-            ChooseOrgDialogFragment.newInstance(
-                    orgInfos,
-                    mSuoshujigou.getText().toString())
-                    .show(getFragmentManager(), "ChooseOrg");
-        }else {
-            new HttpTask(getBaseActivity(), "查询中...", httpGet, tagGetOrgInfo, getOrgInfoUrl, null)
-                    .execute();
-        }
-    }
-
-    @Subscribe
-    public void onChooseOrgEvent(ChooseOrgEvent event) {
-        mSuoshujigou.setText(event.getTitle());
-        mSuoshujigou.setTag(event.getId());
-    }
-
     @OnClick(R.id.login_btn_sign)
     public void attemptLogin() {
         if (TextUtils.isEmpty(mLoginEtUsername.getText())) {
             mLoginEtUsername.setError(getString(R.string.error_field_required));
             mLoginEtUsername.requestFocus();
-        } else if (TextUtils.isEmpty(mSuoshujigou.getText())) {
-            mSuoshujigou.requestFocus();
         } else {
-            // Reset errors.
             mLoginEtUsername.setError(null);
             mLoginEtPassword.setError(null);
 
@@ -154,9 +112,8 @@ public class LoginActivity extends BaseActivity {
                     switch (response.getErrorCode()) {
                         case 0:
                             UserCommunity user = response.getData();
-                            user.setLoginAccount(mLoginEtUsername.getText().toString());
+                            user.setIdcard(mLoginEtUsername.getText().toString());
                             user.setPassword(mLoginEtPassword.getText().toString());
-                            user.setOrgCode((String) mSuoshujigou.getTag());
                             BaseApplication.setCurrentUser(user);
                             startMainActivity();
                             break;
@@ -204,31 +161,6 @@ public class LoginActivity extends BaseActivity {
                         startActivity(intent);
                     }
                     break;
-                case tagGetOrgInfo:
-                    DebugLog.e(event.getResponse());
-                    BaseResponse<List<MutablePair<String, String>>> responseOrgInfo = new Gson().fromJson(event.getResponse(), new TypeToken<BaseResponse<List<MutablePair<String, String>>>>() {
-                    }.getType());
-                    switch (responseOrgInfo.getErrorCode()) {
-                        case 0:
-                            if(responseOrgInfo.getData()==null || responseOrgInfo.getData().size()<=0){
-                                showMessage("机构信息为空，请联系管理员！", AppMsg.STYLE_ALERT);
-                            }else{
-                                orgInfos = responseOrgInfo.getData();
-                                ChooseOrgDialogFragment.newInstance(
-                                        orgInfos,
-                                        mSuoshujigou.getText().toString())
-                                        .show(getFragmentManager(), "ChooseOrg");
-                            }
-                            break;
-                        default:
-                            String msg = responseOrgInfo.getErrorMsg();
-                            if (StringUtils.isEmpty(msg)) {
-                                msg = defaultNetErrorMsg;
-                            }
-                            showMessage(msg);
-                            break;
-                    }
-                    break;
             }
         }
     }
@@ -241,13 +173,9 @@ public class LoginActivity extends BaseActivity {
         if (mLoginCbSavePassword.isChecked()) {
             spEd.putBoolean(LOGIN_SAVE_PASSWORD, true);
             spEd.putString(LOGIN_PASSWORD, mLoginEtPassword.getText().toString());
-            spEd.putString(loginSuoshuJigouName, mSuoshujigou.getText().toString());
-            spEd.putString(loginSuoshuJigouID, (String) mSuoshujigou.getTag());
         } else {
             spEd.remove(LOGIN_SAVE_PASSWORD);
             spEd.remove(LOGIN_PASSWORD);
-            spEd.remove(loginSuoshuJigouID);
-            spEd.remove(loginSuoshuJigouName);
         }
         spEd.putBoolean(loginAutoLogin, mLoginCbAutoLogin.isChecked());
         spEd.apply();
@@ -277,30 +205,23 @@ public class LoginActivity extends BaseActivity {
     void login(){
         String userName = mLoginEtUsername.getText().toString();
         String password = mLoginEtPassword.getText().toString();
-        String orgcode = (String) mSuoshujigou.getTag();
 
         HashMap<String, String> formBody = new HashMap<String, String>();
         formBody.put(loginUserID, userName);
         formBody.put(loginPassword, password);
-        formBody.put(loginOrgcode, orgcode);
         new HttpTask(getBaseActivity(), "登陆中...", httpPost, tagLogin, loginCommunity, formBody).execute();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_login, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             beginActivity(SettingActivity.class);
             return true;

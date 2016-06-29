@@ -67,9 +67,8 @@ public class BinganListActivity extends BaseActivity {
     //    @OnClick(R.id.loadmore)
     void loadMore() {
         HashMap<String,String> mFormBody = new HashMap<String, String>();
-        mFormBody.put("userid", BaseApplication.getCurrentUser().getLoginAccount());
+        mFormBody.put("userid", BaseApplication.getCurrentUser().getIdcard());
         mFormBody.put("password", BaseApplication.getCurrentUser().getPassword());
-        mFormBody.put("orgcode", BaseApplication.getCurrentUser().getOrgCode());
         mFormBody.put("startindex", String.valueOf(cardItems.size()));
         new HttpTask(getBaseActivity(), "查询中...", httpPost, tagcommunityBinganLoadMore, communityBinganLoadMoreUrl, mFormBody)
                 .execute();

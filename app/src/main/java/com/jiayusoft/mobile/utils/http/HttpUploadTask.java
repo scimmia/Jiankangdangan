@@ -79,7 +79,6 @@ public class HttpUploadTask  extends AsyncTask<Void,Integer,String> implements G
         String postTemplate = "idcard={idcard}&orgcode={orgcode}&selfdescribe={selfdescribe}&uploadtype={uploadtype}";
         String postData = Phrase.from(postTemplate)
                 .put("idcard", BaseApplication.getCurrentUser().getIdcard())
-                .put("orgcode",BaseApplication.getCurrentUser().getOrgCode())
                 .put("selfdescribe",mDescribe)
                 .put("uploadtype",mUploadType)
                 .format().toString();
