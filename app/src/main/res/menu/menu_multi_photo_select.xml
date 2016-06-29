@@ -1,0 +1,9 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context="com.jiayusoft.mobile.shengli.emr.community.ehr.MultiPhotoSelectActivity">
+    <item android:id="@+id/action_ok"
+          android:title="@string/action_ok"
+          android:orderInCategory="101"
+          app:showAsAction="ifRoom"/>
+</menu>

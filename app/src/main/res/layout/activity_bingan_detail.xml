@@ -1,0 +1,66 @@
+<com.jiayusoft.mobile.utils.app.LockableDrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.jiayusoft.mobile.shengli.emr.community.bingan.BinganDetailActivity">
+
+    <!-- The main content view -->
+    <!-- main content must be the first element of DrawerLayout because it will be drawn first and drawer must be on top of it -->
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.jiayusoft.mobile.utils.app.HackyViewPager
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <RelativeLayout
+            android:id="@+id/watermark"
+            android:background="#00000000"
+            android:layout_width = "match_parent"
+            android:layout_height = "match_parent">
+
+            <TextView android:id="@+id/marka"
+                      style="@style/watermark_textview"
+                      android:layout_centerInParent="true"
+                      android:layout_centerHorizontal="true"
+                />
+            <TextView android:id="@+id/markb"
+                      style="@style/watermark_textview"
+                      android:layout_toLeftOf="@id/marka"
+                      android:layout_above="@id/marka"
+                />
+            <TextView android:id="@+id/markc"
+                      style="@style/watermark_textview"
+                      android:layout_toRightOf="@id/marka"
+                      android:layout_above="@id/marka"
+                />
+            <TextView android:id="@+id/markd"
+                      style="@style/watermark_textview"
+                      android:layout_toLeftOf="@id/marka"
+                      android:layout_below="@id/marka"
+                />
+            <TextView android:id="@+id/marke"
+                      style="@style/watermark_textview"
+                      android:layout_toRightOf="@id/marka"
+                      android:layout_below="@id/marka"
+                />
+        </RelativeLayout>
+    </FrameLayout>
+
+    <!-- The navigation drawer -->
+
+    <ListView
+        android:id="@+id/left_drawer"
+        android:layout_width="120dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:divider="@color/list_divider"
+        android:dividerHeight="1dp"
+        android:listSelector="@drawable/list_selector"
+        android:background="@color/list_background"/>
+
+
+</com.jiayusoft.mobile.utils.app.LockableDrawerLayout>

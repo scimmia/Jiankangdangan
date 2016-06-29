@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.jiayusoft.mobile.shengli.emr.community">
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+
+    <application
+            android:name=".BaseApplication"
+            android:allowBackup="true"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme">
+        <activity
+                android:name=".LoginActivity"
+                android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+                android:name=".SettingActivity"
+                android:label="@string/title_activity_setting" >
+        </activity>
+        <activity
+                android:name=".MainActivity"
+                android:label="@string/title_activity_main" >
+        </activity>
+        <activity
+                android:name=".bingan.BinganListActivity"
+                android:label="@string/title_activity_search_result" >
+        </activity>
+        <activity
+                android:name=".bingan.BinganDetailActivity"
+                android:label="@string/title_activity_detail" >
+        </activity>
+        <activity
+                android:name=".selfupload.mydescribe.UploadMyDescribeActivity"
+                android:label="@string/title_activity_upload_ehr"
+                android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+                android:name=".ehr.MultiPhotoSelectActivity"
+                android:label="@string/title_activity_multi_photo_select" >
+        </activity>
+        <activity
+                android:name=".ehr.PhotoDetailActivity"
+                android:label="@string/title_activity_photo_detail" >
+        </activity>
+        <activity
+                android:name=".selfupload.mydescribe.MyDescribeDetailActivity"
+                android:label="@string/title_activity_ehr_detail" >
+        </activity>
+        <activity
+                android:name=".selfupload.HealthCheckDetailActivity"
+                android:label="@string/title_activity_healthcheck_detail" >
+        </activity>
+        <activity
+                android:name=".selfupload.SelfuploadListActivity"
+                android:label="@string/title_activity_healthcheck_list" >
+        </activity>
+        <activity
+                android:name=".selfupload.healthcheck.HealthCheckDetailActivity"
+                android:label="@string/title_activity_health_check_detail" >
+        </activity>
+        <activity
+                android:name=".NotYetActivity"
+                android:label="@string/title_activity_not_yet" >
+        </activity>
+    </application>
+
+</manifest>

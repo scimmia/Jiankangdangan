@@ -1,0 +1,57 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <!--<item name="android:actionBarStyle">@style/CustomActionBarStyle</item>-->
+    </style>
+
+    <style name="CustomActionBarStyle" parent="@android:style/Widget.Holo.ActionBar">
+
+        <!--&lt;!&ndash; Change action bar background color &ndash;&gt;-->
+        <!--<item name="android:actionMenuTextColor">@android:color/white</item>-->
+        <!--&lt;!&ndash; Change split action bar background color &ndash;&gt;-->
+        <!--<item name="android:backgroundSplit">@color/skyblue</item>-->
+        <item name="android:titleTextStyle">@style/CustomTitleTextStyle</item>
+        <item name="android:background">@color/sph_background</item>
+    </style>
+    <style name="CustomTitleTextStyle" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
+
+        <!-- Change action bar title color -->
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+    <style name="one_line">
+        <item name="android:layout_marginLeft">8dp</item>
+        <item name="android:layout_marginRight">8dp</item>
+        <item name="android:layout_marginBottom">4dp</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">@dimen/minHeight</item>
+    </style>
+
+    <style name="one_line_material">
+        <item name="android:layout_marginLeft">8dp</item>
+        <item name="android:layout_marginRight">8dp</item>
+        <item name="android:layout_marginBottom">4dp</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">@dimen/minHeight</item>
+    </style>
+
+
+    <style name="watermark_textview">
+        <item name="android:background">@color/watermark_background</item>
+        <item name="android:textColor">@color/watermark_text</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">@dimen/minHeight</item>
+        <item name="android:layout_marginLeft">18dp</item>
+        <item name="android:layout_marginRight">18dp</item>
+        <item name="android:layout_marginBottom">14dp</item>
+        <item name="android:layout_marginTop">14dp</item>
+    </style>
+</resources>

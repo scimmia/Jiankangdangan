@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- customer -->
+    <color name="icon_main_bg_unpressed">#888B8B8B</color>
+    <color name="icon_main_bg_pressed">#9F7833</color>
+    <color name="uploadtitle">#66CCFF</color>
+    <color name="material_primary_green">#ff7bddab</color>
+    <color name="main_background">#ffdfcd86</color>
+
+    <color name="list_item_title">#fff</color>
+    <color name="list_background">#9F7833</color>
+    <color name="list_background_pressed">#992416</color>
+    <color name="list_divider">#272727</color>
+    <color name="counter_text_bg">#626262</color>
+    <color name="counter_text_color">#ff9f8d62</color>
+    <color name="material_base_color">#0056d3</color>
+    <color name="material_primary_color">#f30000</color>
+    <color name="card_background">#9F7833</color>
+
+    <color name="sph_background">#9F7833</color>
+
+    <color name="watermark_background">#00000000</color>
+    <color name="watermark_text">#3d9F7833</color>
+</resources>

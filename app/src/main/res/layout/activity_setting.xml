@@ -1,0 +1,80 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            tools:context="com.jiayusoft.mobile.shengli.emr.community.SettingActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/material_primary_color"
+            android:layout_marginBottom="12dp"/>
+        <RadioGroup
+            android:id="@+id/rg_server"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:id="@+id/rb_default"
+                android:text="@string/default_serveraddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <RadioButton
+                android:id="@+id/rb_inner"
+                android:text="@string/inner_serveraddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <RadioButton
+                android:id="@+id/rb_diy"
+                android:text="@string/diy_serveraddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </RadioGroup>
+
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/server_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:visibility="gone"
+            android:hint="@string/prompt_serveraddress"
+            android:maxLines="1"
+            android:singleLine="true"
+            app:baseColor="@color/material_base_color"
+            app:primaryColor="@color/material_primary_green"
+            app:floatingLabel="highlight"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/material_primary_color"
+            android:layout_marginTop="36dp"
+            android:layout_marginBottom="12dp"/>
+        <Switch
+            android:id="@+id/sw_autosave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:minHeight="48dp"
+            android:text="@string/login_autologin"
+            android:textOn="@string/yes"
+            android:textOff="@string/no"/>
+    </LinearLayout>
+
+</ScrollView>
+
+
+

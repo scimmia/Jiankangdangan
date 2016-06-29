@@ -1,0 +1,19 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context="com.jiayusoft.mobile.shengli.emr.community.selfupload.mydescribe.UploadMyDescribeActivity">
+    <item android:id="@+id/action_add"
+          android:icon="@drawable/ic_gallery"
+          android:title="@string/menu_add"
+          android:orderInCategory="100"
+          app:showAsAction="ifRoom" />
+    <item android:id="@+id/action_camera"
+          android:icon="@drawable/ic_camera"
+          android:title="@string/menu_camera"
+          android:orderInCategory="101"
+          app:showAsAction="ifRoom" />
+    <item android:id="@+id/action_upload"
+          android:title="@string/menu_upload"
+          android:orderInCategory="102"
+          app:showAsAction="ifRoom" />
+</menu>

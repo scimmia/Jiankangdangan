@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">健康档案</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_pre">上一张</string>
+    <string name="action_next">下一张</string>
+    <string name="menu_lock">锁定</string>
+    <string name="menu_unlock">解锁</string>
+    <string name="menu_add">图库</string>
+    <string name="menu_delete">删除</string>
+    <string name="menu_camera">相机</string>
+    <string name="menu_upload">上传</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_account">用户名</string>
+    <string name="prompt_password">密码</string>
+    <string name="action_sign_in">登录</string>
+    <string name="action_sign_in_short">登录</string>
+    <string name="login_savepassword">保存密码</string>
+    <string name="error_field_required">请填写内容</string>
+    <string name="title_activity_main">健康档案</string>
+    <string name="title_activity_search">查阅病案</string>
+    <string name="title_activity_favourite">收藏夹</string>
+    <string name="title_activity_borrow_list">借阅记录</string>
+    <string name="main_chayuebingan">住院病案</string>
+    <string name="main_chayuejilu">收藏夹</string>
+    <string name="main_jieyuebingan">借阅病案</string>
+    <string name="main_jieyuejilu">借阅记录</string>
+    <string name="main_binganzhikong">病案质控</string>
+    <string name="main_shezhi">设置</string>
+    <string name="title_activity_detail">病案详情</string>
+    <string name="title_activity_list_detail">病案详情列表</string>
+    <string name="title_activity_person_info">个人信息</string>
+    <string name="action_list">列表</string>
+    <string name="action_settings">设置</string>
+    <string name="action_ok">确定</string>
+    <string name="action_save">保存</string>
+    <string name="search_menu">查询</string>
+    <string name="search_shenfenzheng">身份证</string>
+    <string name="search_xingming">姓名</string>
+    <string name="search_chuyuanriqi">出院日期</string>
+    <string name="search_chuyuankeshi">出院科室</string>
+    <string name="search_binganhao">病案号</string>
+    <string name="search_suoshujigou">所属机构</string>
+    <string name="search_nodata">没有符合条件的数据</string>
+    <string name="search_nohealthcheck">没有查体报告</string>
+    <string name="title_activity_chuyuanriqi">出院日期</string>
+    <string name="chuyuanriqi_ok">确定</string>
+    <string name="chuyuanriqi_delete">取消</string>
+    <string name="action_star">收藏</string>
+    <string name="datePickerEnd">结束\n日期</string>
+    <string name="datePickerBegin">开始\n日期</string>
+    <string name="title_activity_search_result">病案列表</string>
+    <string name="title_activity_search_borrow">搜索结果</string>
+    <string name="loadmore">加载更多…</string>
+    <string name="title_activity_setting">设置</string>
+    <string name="default_serveraddress">默认服务器地址</string>
+    <string name="inner_serveraddress">内网服务器地址</string>
+    <string name="diy_serveraddress">自定义服务器地址</string>
+    <string name="prompt_serveraddress">例:11.0.0.55:8880/mobile</string>
+    <string name="favourite_nodata">没有收藏的数据</string>
+    <string name="action_notyet">未批复</string>
+    <string name="action_accepted">已批准</string>
+    <string name="action_refused">已拒绝</string>
+    <string name="login_autologin">自动登录</string>
+    <string name="main_person">个人信息</string>
+    <string name="no">否</string>
+    <string name="yes">是</string>
+
+    <string name="title_activity_upload_ehr">病情自述</string>
+    <string name="title_activity_multi_photo_select">选择图片</string>
+    <string name="self_describe">自述:</string>
+    <string name="self_photo">附加图片:</string>
+    <string name="title_activity_photo_detail">病案详情</string>
+    <string name="title_activity_my_ehr_list">查看自述</string>
+    <string name="title_activity_ehr_detail">图片详情</string>
+    <string name="title_activity_healthcheck_detail">门诊病案</string>
+    <string name="title_activity_healthcheck_list">健康查体</string>
+    <string name="title_activity_mydescribe_list">查看自述</string>
+    <string name="title_activity_health_check_detail">查体报告</string>
+    <string name="title_activity_not_yet">开发中</string>
+    <string name="module_noyet">正在开发中，敬请期待</string>
+
+</resources>
