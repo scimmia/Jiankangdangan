@@ -64,7 +64,7 @@ public interface GlobalData {
     public final int maxDescribeCount = 200;
 
     int tagUploadDescribe = 7;
-    String uploadSelfUrl = "/self/upload";
+    String uploadSelfUrl = "/self/uploadwithoutorg";
     int tagUploadPhoto = 8;
     String uploadSelfFileUrl = "/self/upload/file";
 
@@ -89,6 +89,7 @@ public interface GlobalData {
     String baseFolder = Environment.getExternalStorageDirectory().getPath()+ File.separator+"JiayuSoft"+ File.separator;
     String updateFolder = baseFolder + "update" + File.separator;
     String healthCheckFolder = baseFolder + "healthCheck" + File.separator;
+    String picFolder = baseFolder + "pic" + File.separator;
 
 
 }

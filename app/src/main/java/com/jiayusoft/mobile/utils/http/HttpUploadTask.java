@@ -76,7 +76,7 @@ public class HttpUploadTask  extends AsyncTask<Void,Integer,String> implements G
         String url = "http://"+
                 PreferenceManager.getDefaultSharedPreferences(mContent).getString(serverUrl, defaultServerUrl)
         ;
-        String postTemplate = "idcard={idcard}&orgcode={orgcode}&selfdescribe={selfdescribe}&uploadtype={uploadtype}";
+        String postTemplate = "idcard={idcard}&selfdescribe={selfdescribe}&uploadtype={uploadtype}";
         String postData = Phrase.from(postTemplate)
                 .put("idcard", BaseApplication.getCurrentUser().getIdcard())
                 .put("selfdescribe",mDescribe)

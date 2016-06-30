@@ -1,8 +1,9 @@
 package com.jiayusoft.mobile.shengli.emr.community.selfupload.mydescribe;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.SparseBooleanArray;
@@ -18,6 +19,7 @@ import com.jiayusoft.mobile.shengli.emr.community.R;
 import com.jiayusoft.mobile.shengli.emr.community.ehr.MultiPhotoSelectActivity;
 import com.jiayusoft.mobile.shengli.emr.community.ehr.PhotoDetailActivity;
 import com.jiayusoft.mobile.utils.DebugLog;
+import com.jiayusoft.mobile.utils.FileUtils;
 import com.jiayusoft.mobile.utils.GlobalData;
 import com.jiayusoft.mobile.utils.app.BaseActivity;
 import com.jiayusoft.mobile.utils.app.cardview.CardItem;
@@ -29,9 +31,16 @@ import com.rengwuxian.materialedittext.MaterialEditText;
 import com.squareup.otto.Subscribe;
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class UploadMyDescribeActivity extends BaseActivity implements GlobalData {
+
+    final String picTempPath = picFolder + "temp.jpg";
 
     @InjectView(R.id.photo_gallery)
     GridView mPhotoGallery;
@@ -75,7 +84,18 @@ public class UploadMyDescribeActivity extends BaseActivity implements GlobalData
                 break;
             case R.id.action_camera:
                 Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(takePictureIntent, addPhoto);
+                try {
+                    File file = new File(picTempPath);
+                    if (file.exists()) {
+                        file.delete();
+                    }
+                    FileUtils.createFile(picTempPath);
+                    Uri fileUri = Uri.fromFile(file);
+                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+                    startActivityForResult(takePictureIntent, addPhoto);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 break;
             case R.id.action_upload:
                 String describe = mSelfDescribe.getText().toString();
@@ -114,13 +134,52 @@ public class UploadMyDescribeActivity extends BaseActivity implements GlobalData
                     DebugLog.e(selectedFiles.toString());
                     break;
                 case addPhoto:
-                    String[] proj = {MediaStore.Images.Media.DATA};
-                    Cursor actualimagecursor = managedQuery(data.getData(), proj, null, null, null);
-                    int actual_image_column_index = actualimagecursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-                    actualimagecursor.moveToFirst();
-                    String img_path = actualimagecursor.getString(actual_image_column_index);
-                    selectedFiles.add(0, img_path);
-                    refreshGallery();
+                    if (resultCode == RESULT_OK) {
+                        if(data !=null){ //可能尚未指定intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+                            //返回有缩略图
+//                            if(data.hasExtra("data")){
+//                                try {
+//                                    Bitmap thumbnail = data.getParcelableExtra("data");
+//                                    //得到bitmap后的操作
+//                                    DebugLog.e("thumbnail");
+//                                    String filePath = picFolder+new Date().getTime()+ ".jpg";
+//                                    File file = new File(filePath);
+//                                    if (file.exists()) {
+//                                        file.delete();
+//                                    }
+//                                    FileUtils.createFile(filePath);
+//                                    FileOutputStream save = new FileOutputStream(file);
+//                                    thumbnail.compress(Bitmap.CompressFormat.JPEG, 100, save);
+//                                    save.flush();
+//                                    save.close();
+//                                    selectedFiles.add(0, filePath);
+//                                    refreshGallery();
+//                                } catch (Exception e) {
+//                                    e.printStackTrace();
+//                                }
+//                            }
+
+
+                        }
+
+                        try {
+                            //得到bitmap后的操作
+                            DebugLog.e("thumbnail");
+                            String filePath = picFolder+new Date().getTime()+ ".jpg";
+                            saveBitmapToFile(new File(picTempPath),filePath);
+                            selectedFiles.add(0, filePath);
+                            refreshGallery();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+//                    String[] proj = {MediaStore.Images.Media.DATA};
+//                    Cursor actualimagecursor = managedQuery(data.getData(), proj, null, null, null);
+//                    int actual_image_column_index = actualimagecursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+//                    actualimagecursor.moveToFirst();
+//                    String img_path = actualimagecursor.getString(actual_image_column_index);
+//                    selectedFiles.add(0, img_path);
+//                    refreshGallery();
                     break;
                 case photoDetail:
                     Bundle bundleDetail = data.getExtras();
@@ -131,6 +190,63 @@ public class UploadMyDescribeActivity extends BaseActivity implements GlobalData
                     }
                     break;
             }
+        }
+    }
+
+    public static String saveBitmapToFile(File file, String newpath) {
+        try {
+            // BitmapFactory options to downsize the image
+            BitmapFactory.Options o = new BitmapFactory.Options();
+            o.inJustDecodeBounds = true;
+            o.inSampleSize = 6;
+            // factor of downsizing the image
+
+            FileInputStream inputStream = new FileInputStream(file);
+            //Bitmap selectedBitmap = null;
+            BitmapFactory.decodeStream(inputStream, null, o);
+            inputStream.close();
+
+            // The new size we want to scale to
+            final int REQUIRED_SIZE = 75;
+
+            // Find the correct scale value. It should be the power of 2.
+            int scale = 1;
+            while (o.outWidth / scale / 2 >= REQUIRED_SIZE &&
+                    o.outHeight / scale / 2 >= REQUIRED_SIZE) {
+                scale *= 2;
+            }
+
+            BitmapFactory.Options o2 = new BitmapFactory.Options();
+            o2.inSampleSize = scale;
+            inputStream = new FileInputStream(file);
+
+            Bitmap selectedBitmap = BitmapFactory.decodeStream(inputStream, null, o2);
+            inputStream.close();
+
+            // here i override the original image file
+//            file.createNewFile();
+//
+//
+//            FileOutputStream outputStream = new FileOutputStream(file);
+//
+//            selectedBitmap.compress(Bitmap.CompressFormat.JPEG, 100 , outputStream);
+
+
+            File aa = new File(newpath);
+
+            FileOutputStream outputStream = new FileOutputStream(aa);
+
+            //choose another format if PNG doesn't suit you
+
+            selectedBitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+
+
+            String filepath = aa.getAbsolutePath();
+            DebugLog.e("getAbsolutePath"+aa.getAbsolutePath());
+
+            return filepath;
+        } catch (Exception e) {
+            return null;
         }
     }
 
