@@ -48,11 +48,6 @@ public class MainActivity extends BaseActivity {
         mLogoImg.setImageResource(R.drawable.logo_sph);
         String logoName = BaseApplication.getCurrentUser().getLogoName();
         if (StringUtils.isNotEmpty(logoName)){
-            ImageLoader.getInstance().displayImage("http://"
-                    +PreferenceManager.getDefaultSharedPreferences(getBaseActivity()).getString(serverUrl, defaultServerUrl)
-                    +String.format(logoImgUrl,logoName),mLogoImg);
-        }
-        if (StringUtils.isNotEmpty(logoName)){
             String[] logoNames = StringUtils.split(logoName,";");
             if (logoNames!=null){
                 if (logoNames.length == 1){
@@ -106,7 +101,7 @@ public class MainActivity extends BaseActivity {
             try {
                 handler.postDelayed(this, TIME);
                 i = (i+1)%TRANSFORM_CLASSES.size();
-                DebugLog.e("position---"+i);
+//                DebugLog.e("position---"+i);
                 mLogoImgs.setPageTransformer(true, TRANSFORM_CLASSES.get(i).clazz.newInstance());
 
                 int count = mLogoImgs.getAdapter().getCount();
