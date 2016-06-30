@@ -112,7 +112,6 @@ public class LoginActivity extends BaseActivity {
                     switch (response.getErrorCode()) {
                         case 0:
                             UserCommunity user = response.getData();
-                            user.setIdcard(mLoginEtUsername.getText().toString().toUpperCase());
                             user.setPassword(mLoginEtPassword.getText().toString());
                             BaseApplication.setCurrentUser(user);
                             startMainActivity();
@@ -169,7 +168,7 @@ public class LoginActivity extends BaseActivity {
         DebugLog.e("startMainActivity");
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getBaseActivity());
         SharedPreferences.Editor spEd = sp.edit();
-        spEd.putString(LOGIN_USER_NAME, mLoginEtUsername.getText().toString().toUpperCase());
+        spEd.putString(LOGIN_USER_NAME, mLoginEtUsername.getText().toString());
         if (mLoginCbSavePassword.isChecked()) {
             spEd.putBoolean(LOGIN_SAVE_PASSWORD, true);
             spEd.putString(LOGIN_PASSWORD, mLoginEtPassword.getText().toString());
@@ -203,7 +202,7 @@ public class LoginActivity extends BaseActivity {
     }
 
     void login(){
-        String userName = mLoginEtUsername.getText().toString().toUpperCase();
+        String userName = mLoginEtUsername.getText().toString();
         String password = mLoginEtPassword.getText().toString();
 
         HashMap<String, String> formBody = new HashMap<String, String>();
