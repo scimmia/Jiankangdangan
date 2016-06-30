@@ -134,52 +134,15 @@ public class UploadMyDescribeActivity extends BaseActivity implements GlobalData
                     DebugLog.e(selectedFiles.toString());
                     break;
                 case addPhoto:
-                    if (resultCode == RESULT_OK) {
-                        if(data !=null){ //可能尚未指定intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-                            //返回有缩略图
-//                            if(data.hasExtra("data")){
-//                                try {
-//                                    Bitmap thumbnail = data.getParcelableExtra("data");
-//                                    //得到bitmap后的操作
-//                                    DebugLog.e("thumbnail");
-//                                    String filePath = picFolder+new Date().getTime()+ ".jpg";
-//                                    File file = new File(filePath);
-//                                    if (file.exists()) {
-//                                        file.delete();
-//                                    }
-//                                    FileUtils.createFile(filePath);
-//                                    FileOutputStream save = new FileOutputStream(file);
-//                                    thumbnail.compress(Bitmap.CompressFormat.JPEG, 100, save);
-//                                    save.flush();
-//                                    save.close();
-//                                    selectedFiles.add(0, filePath);
-//                                    refreshGallery();
-//                                } catch (Exception e) {
-//                                    e.printStackTrace();
-//                                }
-//                            }
-
-
-                        }
-
-                        try {
-                            //得到bitmap后的操作
-                            DebugLog.e("thumbnail");
-                            String filePath = picFolder+new Date().getTime()+ ".jpg";
-                            saveBitmapToFile(new File(picTempPath),filePath);
-                            selectedFiles.add(0, filePath);
-                            refreshGallery();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
+                    try {
+                        DebugLog.e("addPhoto");
+                        String filePath = picFolder+new Date().getTime()+ ".jpg";
+                        saveBitmapToFile(new File(picTempPath),filePath);
+                        selectedFiles.add(0, filePath);
+                        refreshGallery();
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-//                    String[] proj = {MediaStore.Images.Media.DATA};
-//                    Cursor actualimagecursor = managedQuery(data.getData(), proj, null, null, null);
-//                    int actual_image_column_index = actualimagecursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-//                    actualimagecursor.moveToFirst();
-//                    String img_path = actualimagecursor.getString(actual_image_column_index);
-//                    selectedFiles.add(0, img_path);
-//                    refreshGallery();
                     break;
                 case photoDetail:
                     Bundle bundleDetail = data.getExtras();
@@ -223,23 +186,9 @@ public class UploadMyDescribeActivity extends BaseActivity implements GlobalData
             Bitmap selectedBitmap = BitmapFactory.decodeStream(inputStream, null, o2);
             inputStream.close();
 
-            // here i override the original image file
-//            file.createNewFile();
-//
-//
-//            FileOutputStream outputStream = new FileOutputStream(file);
-//
-//            selectedBitmap.compress(Bitmap.CompressFormat.JPEG, 100 , outputStream);
-
-
             File aa = new File(newpath);
-
             FileOutputStream outputStream = new FileOutputStream(aa);
-
-            //choose another format if PNG doesn't suit you
-
             selectedBitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
-
 
             String filepath = aa.getAbsolutePath();
             DebugLog.e("getAbsolutePath"+aa.getAbsolutePath());

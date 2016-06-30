@@ -7,13 +7,24 @@
               android:background="@color/main_background"
               tools:context="com.jiayusoft.mobile.shengli.emr.community.MainActivity">
     >
-    <ImageView
-        android:id="@+id/logo_img"
-        android:layout_gravity="top"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:scaleType="fitXY"/>
+    <RelativeLayout
+            android:layout_gravity="top"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+        <ImageView
+                android:id="@+id/logo_img"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+        />
+        <com.jiayusoft.mobile.utils.app.viewPager.LoopViewPager
+                android:id="@+id/logo_imgs"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+        />
+    </RelativeLayout>
     <GridView
         android:id="@+id/grid_main"
         android:layout_width="match_parent"
