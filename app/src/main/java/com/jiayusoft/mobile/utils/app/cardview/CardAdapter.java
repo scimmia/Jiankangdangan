@@ -22,12 +22,16 @@ import java.util.ArrayList;
 public class CardAdapter extends BaseAdapter {
     public Context context;
     public ArrayList<CardItem> cardItems;
+    boolean mShowImage;
 
     public CardAdapter(Context context, ArrayList<CardItem> cardItems) {
+        this(context,cardItems,true);
+    }
+    public CardAdapter(Context context, ArrayList<CardItem> cardItems, boolean showImage) {
         this.context = context;
         this.cardItems = cardItems;
+        mShowImage = showImage;
     }
-
     @Override
     public int getCount() {
         return cardItems.size();
@@ -54,7 +58,12 @@ public class CardAdapter extends BaseAdapter {
             viewHolder = (ViewHolder)convertView.getTag();
         }
         viewHolder.mCardContent.setText(cardItems.get(position).getText());
-        viewHolder.mCardImage.setImageResource(android.R.drawable.ic_menu_delete);
+        if (mShowImage) {
+            viewHolder.mCardImage.setImageResource(android.R.drawable.ic_menu_delete);
+            viewHolder.mCardImage.setVisibility(View.VISIBLE);
+        } else {
+            viewHolder.mCardImage.setVisibility(View.GONE);
+        }
         viewHolder.mCardImage.setTag(position);
 
         return convertView;

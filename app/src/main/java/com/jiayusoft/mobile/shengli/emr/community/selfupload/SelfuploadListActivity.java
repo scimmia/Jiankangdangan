@@ -72,6 +72,7 @@ public class SelfuploadListActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mCardItems = new ArrayList<CardItem>();
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             int tempType = bundle.getInt(itemType, 0);
@@ -79,17 +80,17 @@ public class SelfuploadListActivity extends BaseActivity {
             switch (tempType){
                 case R.string.title_activity_mydescribe_list:
                     mUploadType = CardItem.typeMyDescribe;
+                    mCardAdapter = new CardAdapter(getBaseActivity(), mCardItems);
                     break;
                 case R.string.title_activity_healthcheck_list:
                     mUploadType = CardItem.typeHealthCheck;
+                    mCardAdapter = new CardAdapter(getBaseActivity(), mCardItems,false);
                     break;
                 default:
+                    mCardAdapter = new CardAdapter(getBaseActivity(), mCardItems);
                     break;
             }
         }
-
-        mCardItems = new ArrayList<CardItem>();
-        mCardAdapter = new CardAdapter(getBaseActivity(), mCardItems);
         mLoadmore = new Button(getBaseActivity());
         mLoadmore.setText(R.string.loadmore);
         mLoadmore.setOnClickListener(new View.OnClickListener() {
